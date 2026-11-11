@@ -33,6 +33,27 @@ html{scroll-behavior:smooth}
 }
 @media (prefers-reduced-motion: reduce){.card-img{transition:none}html{scroll-behavior:auto}}
 .cat{display:contents}.cat[hidden],[hidden]{display:none !important}
+.dots{display:none}
+summary{padding:14px 0;justify-content:space-between;gap:20px;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:'Montserrat',Arial,sans-serif;font-size:24px;font-weight:400;line-height:1;flex-shrink:0}
+details[open]>summary::after{content:"\2212"}
+@media (max-width: 980px){
+.carousel{display:flex !important;overflow-x:auto;scroll-snap-type:x mandatory;gap:16px !important;margin-inline:calc(-1 * clamp(20px, 5vw, 80px));padding-inline:clamp(20px, 5vw, 80px);scroll-padding-inline:clamp(20px, 5vw, 80px);scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+.carousel::-webkit-scrollbar{display:none}
+.carousel>*:not(.cat),.carousel>.cat>*{flex:0 0 44%;scroll-snap-align:start;min-width:0;box-sizing:border-box}
+.carousel.trust{background:transparent !important;border:0 !important}
+.carousel.trust>*{border:1px solid rgba(243,238,230,0.3)}
+.dots{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:-8px;min-height:12px}
+.dots span{width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.28;transition:opacity .2s,transform .2s}
+.dots span.on{opacity:1;transform:scale(1.25)}
+}
+@media (max-width: 640px){
+.carousel{gap:14px !important}
+.carousel>*:not(.cat),.carousel>.cat>*{flex-basis:82%}
+.chips{flex-wrap:nowrap !important;gap:6px !important;width:100%}
+.chips button{padding:0 11px !important;font-size:12px !important;flex:1 1 auto}
+}
 </style>
 </head>
 <body>
@@ -104,7 +125,7 @@ html{scroll-behavior:smooth}
 </a>
 </div>
 </div>
-<div style="flex: 1 1 360px; min-width: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(10px, 1.4vw, 18px); align-items: end">
+<div style="flex: 1 1 360px; min-width: 0; max-width: 520px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(10px, 1.4vw, 18px); align-items: end">
 <figure style="margin: 0 0 clamp(24px, 4vw, 56px); display: flex; flex-direction: column; gap: 10px">
 <img src="assets/lime.jpg" alt="Sample of a rendered exterior finish" style="width: 100%; aspect-ratio: 3 / 5; object-fit: cover; display: block; box-shadow: 0 24px 48px -20px rgba(22,24,26,0.45)">
 <figcaption style="font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #2E2B27">01 Render</figcaption>
@@ -134,7 +155,7 @@ html{scroll-behavior:smooth}
 <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: #6F5526">What we do</span>
 <h2 style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: clamp(36px, 5vw, 64px); line-height: 1.05">Three trades, one team</h2>
 </div>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: clamp(24px, 3vw, 40px)">
+<div class="carousel" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: clamp(24px, 3vw, 40px)">
 
 <article class="card" style="display: flex; flex-direction: column; background: #F3EEE6">
 <div style="position: relative; overflow: hidden; aspect-ratio: 4 / 3">
@@ -199,14 +220,14 @@ html{scroll-behavior:smooth}
 <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: #6F5526">Recent projects</span>
 <h2 style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: clamp(36px, 5vw, 64px); line-height: 1.05">Our latest work</h2>
 </div>
-<div role="group" aria-label="Filter projects by service" style="display: flex; flex-wrap: wrap; gap: 8px">
+<div class="chips" role="group" aria-label="Filter projects by service" style="display: flex; flex-wrap: wrap; gap: 8px">
 <button type="button" data-filter="all" style="min-height: 44px; padding: 0 18px; border: 1px solid #16181A; background: #16181A; color: #F3EEE6; font-family: inherit; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; cursor: pointer">All</button>
 <button type="button" data-filter="render" style="min-height: 44px; padding: 0 18px; border: 1px solid #16181A; background: transparent; color: #16181A; font-family: inherit; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; cursor: pointer">Rendering</button>
 <button type="button" data-filter="plaster" style="min-height: 44px; padding: 0 18px; border: 1px solid #16181A; background: transparent; color: #16181A; font-family: inherit; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; cursor: pointer">Plastering</button>
 <button type="button" data-filter="decor" style="min-height: 44px; padding: 0 18px; border: 1px solid #16181A; background: transparent; color: #16181A; font-family: inherit; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; cursor: pointer">Decorative</button>
 </div>
 </div>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: clamp(20px, 2.5vw, 32px)">
+<div class="carousel" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: clamp(20px, 2.5vw, 32px)">
 <div data-cat="render" class="cat">
 <article class="card" style="display: flex; flex-direction: column; gap: 16px">
 <div style="position: relative; overflow: hidden; aspect-ratio: 4 / 5">
@@ -254,7 +275,7 @@ html{scroll-behavior:smooth}
 <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: #D9BA82">Why choose us</span>
 <h2 style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: clamp(36px, 5vw, 64px); line-height: 1.05">Guaranteed, insured and approved</h2>
 </div>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr)); gap: 1px; background: rgba(243,238,230,0.22); border: 1px solid rgba(243,238,230,0.22)">
+<div class="carousel trust" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr)); gap: 1px; background: rgba(243,238,230,0.22); border: 1px solid rgba(243,238,230,0.22)">
 <div style="background: #16181A; padding: clamp(24px, 3vw, 36px); display: flex; flex-direction: column; gap: 12px">
 <span style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 44px; line-height: 1; color: #D9BA82">01</span>
 <h3 style="margin: 0; font-size: 16px; font-weight: 600; letter-spacing: 0.04em">Workmanship guarantee</h3>
@@ -285,7 +306,7 @@ html{scroll-behavior:smooth}
 <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: #6F5526">Reviews</span>
 <h2 style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: clamp(36px, 5vw, 64px); line-height: 1.05">What clients say</h2>
 </div>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: clamp(20px, 2.5vw, 32px)">
+<div class="carousel" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: clamp(20px, 2.5vw, 32px)">
 <figure style="margin: 0; padding: clamp(24px, 3vw, 40px); background: #F3EEE6; display: flex; flex-direction: column; gap: 20px">
 <span aria-hidden="true" style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 72px; line-height: 0.6; color: #B08D4F">“</span>
 <blockquote style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 24px; line-height: 1.35">[GOOGLE REVIEW TO BE ADDED]</blockquote>
@@ -307,7 +328,7 @@ html{scroll-behavior:smooth}
 
 <section id="about" style="background: #F3EEE6; padding: clamp(64px, 9vw, 128px) clamp(20px, 5vw, 80px)">
 <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: clamp(40px, 6vw, 96px); align-items: center">
-<div style="flex: 1 1 380px; min-width: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(12px, 2vw, 24px)">
+<div style="flex: 1 1 380px; min-width: 0; max-width: 560px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(12px, 2vw, 24px)">
 <figure style="margin: 0; display: flex; flex-direction: column; gap: 12px">
 <div style="aspect-ratio: 3 / 4; background: #D6CCBC; display: flex; align-items: center; justify-content: center; padding: 16px; text-align: center; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #3D3A35">Photo of Carl</div>
 <figcaption style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 26px; line-height: 1.1">Carl</figcaption>
@@ -451,7 +472,13 @@ if(form)form.addEventListener('submit',function(e){e.preventDefault();if(sent)se
 var btns=document.querySelectorAll('[data-filter]');
 function setF(f){btns.forEach(function(b){var on=b.dataset.filter===f;b.style.background=on?'#16181A':'transparent';b.style.color=on?'#F3EEE6':'#16181A';b.setAttribute('aria-pressed',on);});
 document.querySelectorAll('[data-cat]').forEach(function(c){c.hidden=!(f==='all'||c.dataset.cat===f);});}
-btns.forEach(function(b){b.addEventListener('click',function(){setF(b.dataset.filter);});});
+btns.forEach(function(b){b.addEventListener('click',function(){setF(b.dataset.filter);cars.forEach(function(c){c.el.scrollLeft=0;build(c);});});});
+var cars=[];
+function items(el){var out=[];Array.prototype.forEach.call(el.children,function(ch){if(ch.classList.contains('cat')){if(!ch.hidden)Array.prototype.forEach.call(ch.children,function(g){out.push(g);});}else out.push(ch);});return out;}
+function mark(c){var it=items(c.el);if(!it.length)return;var x=c.el.scrollLeft,best=0,bd=1e9;it.forEach(function(n,i){var d=Math.abs(n.offsetLeft-it[0].offsetLeft-x);if(d<bd){bd=d;best=i;}});if(x+c.el.clientWidth>=c.el.scrollWidth-4)best=it.length-1;Array.prototype.forEach.call(c.dots.children,function(d,i){d.classList.toggle('on',i===best);});}
+function build(c){c.dots.innerHTML='';var n=items(c.el).length;for(var i=0;i<n;i++)c.dots.appendChild(document.createElement('span'));c.dots.style.visibility=n>1?'visible':'hidden';mark(c);}
+document.querySelectorAll('.carousel').forEach(function(el){var d=document.createElement('div');d.className='dots';d.setAttribute('aria-hidden','true');el.insertAdjacentElement('afterend',d);var c={el:el,dots:d};cars.push(c);build(c);var t;el.addEventListener('scroll',function(){if(t)return;t=requestAnimationFrame(function(){t=0;mark(c);});},{passive:true});});
+window.addEventListener('resize',function(){cars.forEach(mark);});
 })();
 </script>
 </body>

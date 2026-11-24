@@ -91,7 +91,7 @@ class Ctx:
 def topbar():
     return f'''<div class="topbar">
 <div class="wrap topbar-row">
-<span>Plastering, rendering and decorative finishes in Cheshire</span>
+<span class="tb-long">Plastering, rendering and decorative finishes in Cheshire</span><span class="tb-short">Plastering &middot; Rendering &middot; Decorative finishes</span>
 <div class="top-extra">
 <a href="#contact">{e(PHONE)}</a>
 <a href="#contact">{e(EMAIL)}</a>
@@ -355,8 +355,8 @@ def home_page():
 <h1 class="display">Plastering, rendering and decorative finishes</h1>
 <p class="lead">One team for every surface of the building. External render, internal plastering and drylining, and hand-finished microcement, Venetian and marble plaster.</p>
 <div class="btn-row">
-<a class="btn btn-ink" href="#contact">Get a free quote</a>
-<a class="btn btn-line btn-case" href="#contact">{ICON_PHONE}<span>Call {e(PHONE)}</span></a>
+<a class="btn btn-ink btn-wide" href="#contact">Get a free quote</a>
+<a class="btn btn-line btn-case" href="#contact">{ICON_PHONE}<span>Call<span class="lbl-l"> {e(PHONE)}</span></span></a>
 <a class="btn btn-line btn-case" href="#contact">{ICON_CHAT}<span>WhatsApp</span></a>
 </div>
 </div>
@@ -392,7 +392,7 @@ def home_page():
 <span class="eyebrow">Recent work</span>
 <h2 class="h2">Jobs we&rsquo;re proud of</h2>
 </div>
-<a class="btn btn-line btn-md" href="jobs.html">See all jobs</a>
+<a class="btn btn-line btn-md to-end" href="jobs.html">See all jobs</a>
 </div>
 {car(job_cards, "grid-3")}
 </div>
@@ -421,7 +421,7 @@ def home_page():
 <span class="eyebrow">Reviews</span>
 <h2 class="h2">What clients say</h2>
 </div>
-<div class="car-nav">
+<div class="car-nav to-end">
 <button class="car-btn" type="button" data-car-prev="reviews-car" aria-label="Previous reviews">{ICON_LEFT}</button>
 <button class="car-btn" type="button" data-car-next="reviews-car" aria-label="Next reviews">{ICON_RIGHT}</button>
 <a class="btn btn-line btn-md" href="reviews.html">All reviews</a>
@@ -452,7 +452,7 @@ def home_page():
 <span class="eyebrow">Instagram</span>
 <h2 class="h2">@[INSTAGRAM HANDLE]</h2>
 </div>
-<a class="btn btn-line btn-md" href="#instagram">Follow on Instagram</a>
+<a class="btn btn-line btn-md to-end" href="#instagram">Follow on Instagram</a>
 </div>
 <div class="insta-grid">
 {insta}
@@ -531,8 +531,8 @@ def service_page(slug):
 <h1 class="display">{e(s["h1"])}</h1>
 <p class="lead">{e(s["intro"])}</p>
 <div class="btn-row">
-<a class="btn btn-ink" href="#contact">Get a free quote</a>
-<a class="btn btn-line btn-case" href="#contact">{ICON_PHONE}<span>Call {e(PHONE)}</span></a>
+<a class="btn btn-ink" href="#contact"><span class="lbl-l">Get a free quote</span><span class="lbl-s">Free quote</span></a>
+<a class="btn btn-line btn-case" href="#contact">{ICON_PHONE}<span>Call<span class="lbl-l"> {e(PHONE)}</span></span></a>
 </div>
 </div>
 <figure class="page-hero-media">{img(s["image"], f"Placeholder image for {s['name']}", lazy=False)}<figcaption class="tag">Placeholder image</figcaption></figure>
@@ -571,7 +571,7 @@ def service_page(slug):
 <span class="eyebrow">Our work</span>
 <h2 class="h2 h2-sm">{e(s["name"] if slug != "insulation" else "Insulation")} projects by our team</h2>
 </div>
-<a class="btn btn-line btn-md" href="jobs.html">Jobs we&rsquo;re proud of</a>
+<a class="btn btn-line btn-md to-end" href="jobs.html">Jobs we&rsquo;re proud of</a>
 </div>
 {car(photos, "grid-photos")}
 </div>
@@ -585,7 +585,7 @@ def service_page(slug):
 <h2 class="h2 h2-sm">What we use</h2>
 <p class="muted-dark">Manufacturer logos sit here on the live site, alongside the approvals the team holds.</p>
 </div>
-<ul class="chip-list">
+<ul class="chip-list chip-grid">
 {chips}
 </ul>
 </div>
@@ -609,7 +609,7 @@ def service_page(slug):
 <span class="eyebrow">Related services</span>
 <h2 class="h2 h2-md">More {e(g["name"].lower())}</h2>
 </div>
-<ul class="chip-list">
+<ul class="chip-list chip-grid chip-grid-related">
 {related}
 <li><a class="chip chip-ink" href="{ctx.home("services")}">All services {ARROW}</a></li>
 </ul>
@@ -645,7 +645,7 @@ def jobs_page():
 
 <section class="section bg-paper">
 <div class="wrap stack">
-<div class="sec-head-row">
+<div class="filter-row">
 <p class="note">Drag the handle on each photo to compare before and after.</p>
 <div class="chips" role="group" aria-label="Filter jobs by service">
 {chr(10).join(chips)}

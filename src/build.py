@@ -220,7 +220,7 @@ def quote_section(ctx):
         svc_opts.append(f'<optgroup label="{e(g["name"])}">{inner}</optgroup>')
     svc_opts.append('<option value="not-sure">Not sure yet</option>')
     rows = [("Phone", PHONE), ("WhatsApp", WHATSAPP), ("Email", EMAIL),
-            ("Ravi", "[RAVI'S EMAIL]")]
+            ("Rav", "[RAV'S EMAIL]")]
     contact = "\n".join(
         f'<a href="#contact"><span class="k">{e(k)}</span><span class="v">{e(v)}</span></a>' for k, v in rows)
     return f'''<section class="section bg-dark" id="contact">
@@ -434,12 +434,12 @@ def home_page():
 <section class="section bg-paper2" id="about">
 <div class="wrap about-row">
 <div class="people people-solo">
-<figure class="person"><div class="ph-box">Photo of Ravi</div><figcaption>Ravi</figcaption></figure>
+<figure class="person"><div class="ph-box">Photo of Rav</div><figcaption>Rav</figcaption></figure>
 </div>
 <div class="about-copy">
 <span class="eyebrow">About us</span>
-<h2 class="h2">Meet Ravi</h2>
-<p class="body-lg">[COMPANY STORY: how Ravi started, years on the tools, the kind of projects he takes on.] You deal with Ravi directly, from the first site visit to the final coat.</p>
+<h2 class="h2">Meet Rav</h2>
+<p class="body-lg">[COMPANY STORY: how Rav started, years on the tools, the kind of projects he takes on.] You deal with Rav directly, from the first site visit to the final coat.</p>
 <a class="btn btn-line btn-md" href="#contact">Get in touch</a>
 </div>
 </div>

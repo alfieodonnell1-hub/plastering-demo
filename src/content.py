@@ -3,7 +3,7 @@
 Sources: the 23 Oct 2026 website brief and the 12 Nov 2026 meeting notes.
 Anything in [SQUARE BRACKETS] is a placeholder still to be supplied by the client.
 Service descriptions, benefits and FAQ answers are draft copy written for the demo:
-check them with Ravi before the site goes live.
+check them with Rav before the site goes live.
 """
 
 PHONE = "[PHONE NUMBER]"

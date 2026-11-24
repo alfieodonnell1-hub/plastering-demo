@@ -3,7 +3,7 @@
 Sources: the 23 Oct 2026 website brief and the 12 Nov 2026 meeting notes.
 Anything in [SQUARE BRACKETS] is a placeholder still to be supplied by the client.
 Service descriptions, benefits and FAQ answers are draft copy written for the demo:
-check them with Carl and Rav before the site goes live.
+check them with Ravi before the site goes live.
 """
 
 PHONE = "[PHONE NUMBER]"
@@ -85,7 +85,7 @@ SERVICES = {
         "faqs": [
             ("Does K Rend need painting?", "No. The colour runs through the finish, so it does not need a paint coat. An occasional wash keeps it looking fresh."),
             ("Can it go over my existing render or brickwork?", "Often, but it depends on the condition of what is there. We check the wall at the survey and tell you whether it can be rendered over or needs taking back first."),
-            ("How long does a job take?", "[TYPICAL TIMESCALE FOR A HOUSE, TO CONFIRM WITH CARL AND RAV]"),
+            ("How long does a job take?", "[TYPICAL TIMESCALE FOR A HOUSE]"),
         ],
         "cost_name": "K Rend",
     },

@@ -135,7 +135,6 @@ def header(ctx):
 </div>
 </div>
 <a href="jobs.html"{ctx.cur("jobs")}>Jobs we&rsquo;re proud of</a>
-<a href="{ctx.home("areas")}">Areas</a>
 <a href="reviews.html"{ctx.cur("reviews")}>Reviews</a>
 <a href="{ctx.home("about")}">About</a>
 </nav>
@@ -151,7 +150,6 @@ def header(ctx):
 {m_groups}
 </div>
 <a href="jobs.html"{ctx.cur("jobs")}>Jobs we&rsquo;re proud of</a>
-<a href="{ctx.home("areas")}">Areas we cover</a>
 <a href="reviews.html"{ctx.cur("reviews")}>Reviews</a>
 <a href="{ctx.home("about")}">About</a>
 <a href="#contact">Get a free quote</a>
@@ -177,7 +175,6 @@ def footer(ctx):
 <p class="foot-title">Explore</p>
 <a href="jobs.html">Jobs we&rsquo;re proud of</a>
 <a href="reviews.html">Reviews</a>
-<a href="{ctx.home("areas")}">Areas we cover</a>
 <a href="{ctx.home("about")}">About</a>
 <a href="#contact">Contact</a>
 </div>
@@ -223,7 +220,7 @@ def quote_section(ctx):
         svc_opts.append(f'<optgroup label="{e(g["name"])}">{inner}</optgroup>')
     svc_opts.append('<option value="not-sure">Not sure yet</option>')
     rows = [("Phone", PHONE), ("WhatsApp", WHATSAPP), ("Email", EMAIL),
-            ("Carl", "[CARL'S EMAIL]"), ("Rav", "[RAV'S EMAIL]")]
+            ("Ravi", "[RAVI'S EMAIL]")]
     contact = "\n".join(
         f'<a href="#contact"><span class="k">{e(k)}</span><span class="v">{e(v)}</span></a>' for k, v in rows)
     return f'''<section class="section bg-dark" id="contact">
@@ -436,33 +433,19 @@ def home_page():
 
 <section class="section bg-paper2" id="about">
 <div class="wrap about-row">
-<div class="people">
-<figure class="person"><div class="ph-box">Photo of Carl</div><figcaption>Carl</figcaption></figure>
-<figure class="person"><div class="ph-box">Photo of Rav</div><figcaption>Rav</figcaption></figure>
+<div class="people people-solo">
+<figure class="person"><div class="ph-box">Photo of Ravi</div><figcaption>Ravi</figcaption></figure>
 </div>
 <div class="about-copy">
 <span class="eyebrow">About us</span>
-<h2 class="h2">Run by Carl and Rav</h2>
-<p class="body-lg">[COMPANY STORY: how Carl and Rav started, years on the tools, the kind of projects they take on.] You deal with the two of them directly, from the first site visit to the final coat.</p>
-<a class="btn btn-line btn-md" href="#about">Meet the team</a>
+<h2 class="h2">Meet Ravi</h2>
+<p class="body-lg">[COMPANY STORY: how Ravi started, years on the tools, the kind of projects he takes on.] You deal with Ravi directly, from the first site visit to the final coat.</p>
+<a class="btn btn-line btn-md" href="#contact">Get in touch</a>
 </div>
 </div>
 </section>
 
-<section class="section bg-paper" id="areas">
-<div class="wrap split">
-<div class="sec-head">
-<span class="eyebrow">Areas we cover</span>
-<h2 class="h2">Based in Appleton, working across Cheshire</h2>
-<p class="muted">Each town gets its own page on the live site. Towns below are placeholders until the coverage area is confirmed.</p>
-</div>
-<ul class="chip-list">
-{chr(10).join(f'<li><a class="chip" href="#areas">[TOWN {i}]</a></li>' for i in range(1, 7))}
-</ul>
-</div>
-</section>
-
-<section class="section bg-paper2" id="instagram">
+<section class="section bg-paper" id="instagram">
 <div class="wrap stack">
 <div class="sec-head-row">
 <div class="sec-head">

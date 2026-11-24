@@ -254,6 +254,18 @@ def quote_section(ctx):
 </section>'''
 
 
+_asset_v = {}
+
+
+def asset_url(name):
+    """assets/<name>?v=<content hash>, so browsers fetch fresh CSS/JS after every change."""
+    if name not in _asset_v:
+        import hashlib
+        with open(os.path.join(ROOT, "assets", name), "rb") as f:
+            _asset_v[name] = hashlib.md5(f.read()).hexdigest()[:8]
+    return f"assets/{name}?v={_asset_v[name]}"
+
+
 def page(ctx, title, desc, main):
     return f'''<!doctype html>
 <html lang="en-GB">
@@ -267,7 +279,7 @@ def page(ctx, title, desc, main):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&amp;family=Montserrat:wght@400;500;600&amp;display=swap">
-<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="{asset_url("site.css")}">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -279,7 +291,7 @@ def page(ctx, title, desc, main):
 </main>
 {footer(ctx)}
 {mobile_bar()}
-<script src="assets/site.js" defer></script>
+<script src="{asset_url("site.js")}" defer></script>
 </body>
 </html>
 '''

@@ -110,7 +110,8 @@
     var dots = d.createElement('div');
     dots.className = 'dots';
     dots.setAttribute('aria-hidden', 'true');
-    el.insertAdjacentElement('afterend', dots);
+    var slot = el.parentNode.querySelector('.dots-slot');
+    if (slot) slot.appendChild(dots); else el.insertAdjacentElement('afterend', dots);
     var id = el.id;
     var c = {
       el: el, dots: dots,

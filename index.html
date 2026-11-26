@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&amp;family=Montserrat:wght@400;500;600&amp;display=swap">
-<link rel="stylesheet" href="assets/site.css?v=50cf1241">
+<link rel="stylesheet" href="assets/site.css?v=51125cf5">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -27,7 +27,16 @@
 <div class="wrap header-row">
 <a class="logo" href="./" aria-label="The Plastering and Rendering Group, home"><img src="assets/logo-ink.png" alt="The Plastering and Rendering Group" width="900" height="239"></a>
 <nav class="nav" aria-label="Main">
-<a href="#services">Services</a>
+<div class="nav-item nav-item-compact" data-mega-wrap>
+<button class="nav-btn" type="button" aria-expanded="false" aria-controls="mega" data-mega-btn>Services <svg class="chev" aria-hidden="true" width="12" height="8" viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 1.5l5 5 5-5"></path></svg></button>
+<div class="mega mega-compact" id="mega" hidden>
+<ul>
+<li><a href="#external-rendering"><span>External rendering</span><span aria-hidden="true">&rarr;</span></a></li>
+<li><a href="#internal-plastering-drylining"><span>Internal plastering &amp; drylining</span><span aria-hidden="true">&rarr;</span></a></li>
+<li><a href="#decorative-finishes"><span>Decorative finishes</span><span aria-hidden="true">&rarr;</span></a></li>
+</ul>
+</div>
+</div>
 <a href="#jobs">Jobs we&rsquo;re proud of</a>
 <a href="#reviews">Reviews</a>
 <a href="#about">About</a>
@@ -39,7 +48,14 @@
 </div>
 <nav class="mnav" id="mnav" aria-label="Mobile" hidden>
 <div class="wrap">
-<a href="#services">Services</a>
+<button class="mnav-acc" type="button" aria-expanded="false" aria-controls="mnav-services" data-acc>Services <svg class="chev" aria-hidden="true" width="12" height="8" viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 1.5l5 5 5-5"></path></svg></button>
+<div class="mnav-services" id="mnav-services" hidden>
+<ul>
+<li><a href="#external-rendering"><span>External rendering</span><span aria-hidden="true">&rarr;</span></a></li>
+<li><a href="#internal-plastering-drylining"><span>Internal plastering &amp; drylining</span><span aria-hidden="true">&rarr;</span></a></li>
+<li><a href="#decorative-finishes"><span>Decorative finishes</span><span aria-hidden="true">&rarr;</span></a></li>
+</ul>
+</div>
 <a href="#jobs">Jobs we&rsquo;re proud of</a>
 <a href="#reviews">Reviews</a>
 <a href="#about">About</a>
@@ -84,7 +100,7 @@
 </div>
 <div class="car-wrap">
 <div class="grid-3 carousel">
-<article class="svc-card">
+<article class="svc-card" id="external-rendering">
 <div class="media"><img src="assets/monocouche.jpg" alt="Placeholder image for external rendering" width="800" height="1000" loading="lazy" decoding="async"><span class="tag">Placeholder image</span></div>
 <div class="svc-body">
 <h3>External rendering</h3>
@@ -98,7 +114,7 @@
 </ul>
 </div>
 </article>
-<article class="svc-card">
+<article class="svc-card" id="internal-plastering-drylining">
 <div class="media"><img src="assets/krend.jpg" alt="Placeholder image for internal plastering &amp; drylining" width="800" height="1000" loading="lazy" decoding="async"><span class="tag">Placeholder image</span></div>
 <div class="svc-body">
 <h3>Internal plastering &amp; drylining</h3>
@@ -114,7 +130,7 @@
 </ul>
 </div>
 </article>
-<article class="svc-card">
+<article class="svc-card" id="decorative-finishes">
 <div class="media"><img src="assets/marble.jpg" alt="Placeholder image for decorative finishes" width="800" height="1000" loading="lazy" decoding="async"><span class="tag">Placeholder image</span></div>
 <div class="svc-body">
 <h3>Decorative finishes</h3>
@@ -205,10 +221,7 @@
 <span class="eyebrow">Reviews</span>
 <h2 class="h2">What clients say</h2>
 </div>
-<div class="car-nav arrows-only">
-<button class="car-btn" type="button" data-car-prev="reviews-car" aria-label="Previous reviews"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg></button>
-<button class="car-btn" type="button" data-car-next="reviews-car" aria-label="Next reviews"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"></path></svg></button>
-</div>
+
 </div>
 <div class="car-wrap">
 <div class="car-always carousel" id="reviews-car">
@@ -248,6 +261,7 @@
 <figcaption><span class="who">Iceland Food Warehouse</span></figcaption>
 </figure>
 </div>
+<div class="car-controls"><button class="car-btn" type="button" data-car-prev="reviews-car" aria-label="Previous"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg></button><div class="dots-slot"></div><button class="car-btn" type="button" data-car-next="reviews-car" aria-label="Next"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"></path></svg></button></div>
 </div>
 </div>
 </section>
@@ -284,21 +298,22 @@
 <div class="media"><img src="assets/marble.jpg" alt="Placeholder for an Instagram post" width="800" height="1000" loading="lazy" decoding="async"></div>
 <div class="media"><img src="assets/plaster.jpg" alt="Placeholder for an Instagram post" width="1000" height="750" loading="lazy" decoding="async"></div>
 </div>
-<p class="note">Our latest Instagram posts will show here once the feed is connected.</p>
+<p class="note insta-note">Our latest Instagram posts will show here once the feed is connected.</p>
 </div>
 </section>
 <section class="section bg-dark" id="contact">
-<div class="wrap quote-grid">
-<div class="quote-copy">
+<div class="wrap">
+<div class="quote-head">
 <span class="gold-rule" aria-hidden="true"></span>
 <h2 class="h2 h2-xl">Get a free quote</h2>
 <p class="lead-dark">Tell us about the job and we will come back to you to arrange a site visit. Photos and drawings help if you have them.</p>
+</div>
+<div class="quote-grid">
 <div class="contact-list">
 <a href="tel:+447894915828"><span class="k">Phone</span><span class="v">07894 915828</span></a>
 <a href="#contact"><span class="k">WhatsApp</span><span class="v">[WHATSAPP NUMBER]</span></a>
 <a href="#contact"><span class="k">Email</span><span class="v">info@theplasteringandrenderinggroup.co.uk</span></a>
 <a href="#contact"><span class="k">Rav</span><span class="v">[RAV&#x27;S EMAIL]</span></a>
-</div>
 </div>
 <form class="quote-form" data-quote-form novalidate>
 <div class="form-row">
@@ -318,6 +333,7 @@
 <p class="form-status" role="status" hidden>This is a preview, so nothing was sent. On the live site this form goes to info@theplasteringandrenderinggroup.co.uk.</p>
 </form>
 </div>
+</div>
 </section>
 </main>
 <footer class="site-footer">
@@ -329,9 +345,9 @@
 </div>
 <div class="foot-col">
 <p class="foot-title">Services</p>
-<a href="#services">External rendering</a>
-<a href="#services">Internal plastering &amp; drylining</a>
-<a href="#services">Decorative finishes</a>
+<a href="#external-rendering">External rendering</a>
+<a href="#internal-plastering-drylining">Internal plastering &amp; drylining</a>
+<a href="#decorative-finishes">Decorative finishes</a>
 </div>
 <div class="foot-col">
 <p class="foot-title">Explore</p>
@@ -366,6 +382,6 @@
 <a href="#contact">WhatsApp</a>
 <a class="mb-quote" href="#contact">Free quote</a>
 </div>
-<script src="assets/site.js?v=5c79469b" defer></script>
+<script src="assets/site.js?v=8eb501cc" defer></script>
 </body>
 </html>

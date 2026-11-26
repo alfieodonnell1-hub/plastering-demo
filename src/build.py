@@ -141,8 +141,26 @@ def header(ctx):
 <a href="jobs.html"{ctx.cur("jobs")}>Jobs we&rsquo;re proud of</a>
 <a href="reviews.html"{ctx.cur("reviews")}>Reviews</a>'''
     else:
-        # single-page mode: the menu jumps to sections of the home page
-        desk = mob = f'''<a href="{ctx.home("services")}">Services</a>
+        # single-page mode: Services lists the three main groups (home-page cards);
+        # the other menu items jump to home-page sections
+        group_links = "\n".join(
+            f'<li><a href="{ctx.home(g["anchor"])}"><span>{e(g["name"])}</span>{ARROW}</a></li>' for g in GROUPS)
+        desk = f'''<div class="nav-item nav-item-compact" data-mega-wrap>
+<button class="nav-btn" type="button" aria-expanded="false" aria-controls="mega" data-mega-btn>Services {ICON_CHEV}</button>
+<div class="mega mega-compact" id="mega" hidden>
+<ul>
+{group_links}
+</ul>
+</div>
+</div>
+<a href="{ctx.home("jobs")}">Jobs we&rsquo;re proud of</a>
+<a href="{ctx.home("reviews")}">Reviews</a>'''
+        mob = f'''<button class="mnav-acc" type="button" aria-expanded="false" aria-controls="mnav-services" data-acc>Services {ICON_CHEV}</button>
+<div class="mnav-services" id="mnav-services" hidden>
+<ul>
+{group_links}
+</ul>
+</div>
 <a href="{ctx.home("jobs")}">Jobs we&rsquo;re proud of</a>
 <a href="{ctx.home("reviews")}">Reviews</a>'''
     return f'''<header class="site-header">
@@ -168,7 +186,7 @@ def header(ctx):
 
 
 def footer(ctx):
-    groups = "\n".join(f'<a href="{ctx.home("services")}">{e(g["name"])}</a>' for g in GROUPS)
+    groups = "\n".join(f'<a href="{ctx.home(g["anchor"])}">{e(g["name"])}</a>' for g in GROUPS)
     if SHOW_SUBPAGES:
         explore = '<a href="jobs.html">Jobs we&rsquo;re proud of</a>\n<a href="reviews.html">Reviews</a>'
     else:
@@ -237,14 +255,15 @@ def quote_section(ctx):
     contact = "\n".join(
         f'<a href="{h}"><span class="k">{e(k)}</span><span class="v">{e(v)}</span></a>' for k, v, h in rows)
     return f'''<section class="section bg-dark" id="contact">
-<div class="wrap quote-grid">
-<div class="quote-copy">
+<div class="wrap">
+<div class="quote-head">
 <span class="gold-rule" aria-hidden="true"></span>
 <h2 class="h2 h2-xl">Get a free quote</h2>
 <p class="lead-dark">Tell us about the job and we will come back to you to arrange a site visit. Photos and drawings help if you have them.</p>
+</div>
+<div class="quote-grid">
 <div class="contact-list">
 {contact}
-</div>
 </div>
 <form class="quote-form" data-quote-form novalidate>
 <div class="form-row">
@@ -263,6 +282,7 @@ def quote_section(ctx):
 <button class="btn btn-ink" type="submit">Request my free quote</button>
 <p class="form-status" role="status" hidden>This is a preview, so nothing was sent. On the live site this form goes to {e(EMAIL)}.</p>
 </form>
+</div>
 </div>
 </section>'''
 
@@ -310,9 +330,16 @@ def page(ctx, title, desc, main):
 '''
 
 
-def car(inner, cls, cid=None):
+def car(inner, cls, cid=None, controls=False):
     i = f' id="{cid}"' if cid else ""
-    return f'<div class="car-wrap">\n<div class="{cls} carousel"{i}>\n{inner}\n</div>\n</div>'
+    ctrl = ""
+    if controls and cid:
+        ctrl = (f'\n<div class="car-controls">'
+                f'<button class="car-btn" type="button" data-car-prev="{cid}" aria-label="Previous">{ICON_LEFT}</button>'
+                f'<div class="dots-slot"></div>'
+                f'<button class="car-btn" type="button" data-car-next="{cid}" aria-label="Next">{ICON_RIGHT}</button>'
+                f'</div>')
+    return f'<div class="car-wrap">\n<div class="{cls} carousel"{i}>\n{inner}\n</div>{ctrl}\n</div>'
 
 
 def ba(job, live):
@@ -358,7 +385,7 @@ def home_page():
                 f'<li><a href="{s}.html"><span>{e(menu_name(s))}</span>{ARROW}</a></li>' for s in g["services"])
         else:
             links = "\n".join(f'<li><span class="item">{e(menu_name(s))}</span></li>' for s in g["services"])
-        cards.append(f'''<article class="svc-card">
+        cards.append(f'''<article class="svc-card" id="{g["anchor"]}">
 <div class="media">{img(g["image"], f"Placeholder image for {g['name'].lower()}")}<span class="tag">Placeholder image</span></div>
 <div class="svc-body">
 <h3>{e(g["name"])}</h3>
@@ -378,17 +405,7 @@ def home_page():
             f'<div class="job-card">\n{ba(jobs_by_id[j], live=False)}\n{job_meta(jobs_by_id[j])}\n</div>'
             for j in HOME_JOBS)
     see_all_jobs = '<a class="btn btn-line btn-md to-end" href="jobs.html">See all jobs</a>' if SHOW_SUBPAGES else ""
-    if SHOW_SUBPAGES:
-        car_nav = f'''<div class="car-nav to-end">
-<button class="car-btn" type="button" data-car-prev="reviews-car" aria-label="Previous reviews">{ICON_LEFT}</button>
-<button class="car-btn" type="button" data-car-next="reviews-car" aria-label="Next reviews">{ICON_RIGHT}</button>
-<a class="btn btn-line btn-md" href="reviews.html">All reviews</a>
-</div>'''
-    else:
-        car_nav = f'''<div class="car-nav arrows-only">
-<button class="car-btn" type="button" data-car-prev="reviews-car" aria-label="Previous reviews">{ICON_LEFT}</button>
-<button class="car-btn" type="button" data-car-next="reviews-car" aria-label="Next reviews">{ICON_RIGHT}</button>
-</div>'''
+    all_reviews = '<a class="btn btn-line btn-md to-end" href="reviews.html">All reviews</a>' if SHOW_SUBPAGES else ""
     reviews = "\n".join(review_card(n, r) for n, r in TESTIMONIALS)
     insta = "\n".join(
         f'<div class="media">{img(t, "Placeholder for an Instagram post")}</div>' for t in INSTAGRAM_TILES)
@@ -466,9 +483,9 @@ def home_page():
 <span class="eyebrow">Reviews</span>
 <h2 class="h2">What clients say</h2>
 </div>
-{car_nav}
+{all_reviews}
 </div>
-{car(reviews, "car-always", "reviews-car")}
+{car(reviews, "car-always", "reviews-car", controls=True)}
 </div>
 </section>
 
@@ -499,7 +516,7 @@ def home_page():
 <div class="insta-grid">
 {insta}
 </div>
-<p class="note">Our latest Instagram posts will show here once the feed is connected.</p>
+<p class="note insta-note">Our latest Instagram posts will show here once the feed is connected.</p>
 </div>
 </section>'''
     return page(ctx, f"{SITE_NAME} | Plastering, rendering and decorative finishes in Cheshire",

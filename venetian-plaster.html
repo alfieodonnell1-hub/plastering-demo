@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&amp;family=Montserrat:wght@400;500;600&amp;display=swap">
-<link rel="stylesheet" href="assets/site.css?v=50cf1241">
+<link rel="stylesheet" href="assets/site.css?v=51125cf5">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -27,7 +27,16 @@
 <div class="wrap header-row">
 <a class="logo" href="./" aria-label="The Plastering and Rendering Group, home"><img src="assets/logo-ink.png" alt="The Plastering and Rendering Group" width="900" height="239"></a>
 <nav class="nav" aria-label="Main">
-<a href="index.html#services">Services</a>
+<div class="nav-item nav-item-compact" data-mega-wrap>
+<button class="nav-btn" type="button" aria-expanded="false" aria-controls="mega" data-mega-btn>Services <svg class="chev" aria-hidden="true" width="12" height="8" viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 1.5l5 5 5-5"></path></svg></button>
+<div class="mega mega-compact" id="mega" hidden>
+<ul>
+<li><a href="index.html#external-rendering"><span>External rendering</span><span aria-hidden="true">&rarr;</span></a></li>
+<li><a href="index.html#internal-plastering-drylining"><span>Internal plastering &amp; drylining</span><span aria-hidden="true">&rarr;</span></a></li>
+<li><a href="index.html#decorative-finishes"><span>Decorative finishes</span><span aria-hidden="true">&rarr;</span></a></li>
+</ul>
+</div>
+</div>
 <a href="index.html#jobs">Jobs we&rsquo;re proud of</a>
 <a href="index.html#reviews">Reviews</a>
 <a href="index.html#about">About</a>
@@ -39,7 +48,14 @@
 </div>
 <nav class="mnav" id="mnav" aria-label="Mobile" hidden>
 <div class="wrap">
-<a href="index.html#services">Services</a>
+<button class="mnav-acc" type="button" aria-expanded="false" aria-controls="mnav-services" data-acc>Services <svg class="chev" aria-hidden="true" width="12" height="8" viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 1.5l5 5 5-5"></path></svg></button>
+<div class="mnav-services" id="mnav-services" hidden>
+<ul>
+<li><a href="index.html#external-rendering"><span>External rendering</span><span aria-hidden="true">&rarr;</span></a></li>
+<li><a href="index.html#internal-plastering-drylining"><span>Internal plastering &amp; drylining</span><span aria-hidden="true">&rarr;</span></a></li>
+<li><a href="index.html#decorative-finishes"><span>Decorative finishes</span><span aria-hidden="true">&rarr;</span></a></li>
+</ul>
+</div>
 <a href="index.html#jobs">Jobs we&rsquo;re proud of</a>
 <a href="index.html#reviews">Reviews</a>
 <a href="index.html#about">About</a>
@@ -168,17 +184,18 @@
 </div>
 </section>
 <section class="section bg-dark" id="contact">
-<div class="wrap quote-grid">
-<div class="quote-copy">
+<div class="wrap">
+<div class="quote-head">
 <span class="gold-rule" aria-hidden="true"></span>
 <h2 class="h2 h2-xl">Get a free quote</h2>
 <p class="lead-dark">Tell us about the job and we will come back to you to arrange a site visit. Photos and drawings help if you have them.</p>
+</div>
+<div class="quote-grid">
 <div class="contact-list">
 <a href="tel:+447894915828"><span class="k">Phone</span><span class="v">07894 915828</span></a>
 <a href="#contact"><span class="k">WhatsApp</span><span class="v">[WHATSAPP NUMBER]</span></a>
 <a href="#contact"><span class="k">Email</span><span class="v">info@theplasteringandrenderinggroup.co.uk</span></a>
 <a href="#contact"><span class="k">Rav</span><span class="v">[RAV&#x27;S EMAIL]</span></a>
-</div>
 </div>
 <form class="quote-form" data-quote-form novalidate>
 <div class="form-row">
@@ -198,6 +215,7 @@
 <p class="form-status" role="status" hidden>This is a preview, so nothing was sent. On the live site this form goes to info@theplasteringandrenderinggroup.co.uk.</p>
 </form>
 </div>
+</div>
 </section>
 </main>
 <footer class="site-footer">
@@ -209,9 +227,9 @@
 </div>
 <div class="foot-col">
 <p class="foot-title">Services</p>
-<a href="index.html#services">External rendering</a>
-<a href="index.html#services">Internal plastering &amp; drylining</a>
-<a href="index.html#services">Decorative finishes</a>
+<a href="index.html#external-rendering">External rendering</a>
+<a href="index.html#internal-plastering-drylining">Internal plastering &amp; drylining</a>
+<a href="index.html#decorative-finishes">Decorative finishes</a>
 </div>
 <div class="foot-col">
 <p class="foot-title">Explore</p>
@@ -246,6 +264,6 @@
 <a href="#contact">WhatsApp</a>
 <a class="mb-quote" href="#contact">Free quote</a>
 </div>
-<script src="assets/site.js?v=5c79469b" defer></script>
+<script src="assets/site.js?v=8eb501cc" defer></script>
 </body>
 </html>

@@ -21,6 +21,7 @@ EMAIL = "info@theplasteringandrenderinggroup.co.uk"
 GROUPS = [
     {
         "id": "render",
+        "anchor": "external-rendering",
         "name": "External rendering",
         "short": "Rendering",
         "blurb": "Weatherproof, breathable finishes for new builds, extensions and tired elevations.",
@@ -29,6 +30,7 @@ GROUPS = [
     },
     {
         "id": "plaster",
+        "anchor": "internal-plastering-drylining",
         "name": "Internal plastering & drylining",
         "short": "Plastering",
         "blurb": "Flat walls, true ceilings and the boarding and insulation that sit behind them.",
@@ -38,6 +40,7 @@ GROUPS = [
     },
     {
         "id": "decor",
+        "anchor": "decorative-finishes",
         "name": "Decorative finishes",
         "short": "Decorative",
         "blurb": "Hand-applied feature finishes for walls, floors, wet rooms and pool surrounds.",

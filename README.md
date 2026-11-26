@@ -13,6 +13,10 @@ All images are placeholders, and anything in [SQUARE BRACKETS] is still to be su
 - `jobs.html` – Jobs we're proud of (before-and-after sliders, filterable by service)
 - `reviews.html` – testimonials and Google reviews
 
+## Single-page mode
+
+While content for the other pages is being gathered, `SHOW_SUBPAGES = False` in `src/content.py` keeps the site to the home page: the menus jump to home-page sections and nothing links to the service, Jobs or Reviews pages (they are still built). Set it to `True` and rebuild to link them again.
+
 ## Editing
 
 - Page text: `src/content.py`

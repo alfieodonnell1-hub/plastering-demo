@@ -147,7 +147,7 @@ a:hover{color:var(--gold-text)}
 .grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:clamp(24px,3vw,40px)}
 .svc-card{display:flex;flex-direction:column;background:var(--paper-2)}
 .svc-card .media{aspect-ratio:4/3}
-.svc-card:hover .media img,.job-card:hover .ba img,.photo:hover img{transform:scale(1.04)}
+.svc-card:hover .media img,a.job-card:hover .ba img,.photo:hover img{transform:scale(1.04)}
 .svc-body{display:flex;flex-direction:column;gap:18px;flex-grow:1;padding:clamp(24px,3vw,36px)}
 .svc-body h3{margin:0;font-family:var(--serif);font-weight:500;font-size:34px;line-height:1.1}
 .svc-body p{margin:0;color:var(--ink-3);font-size:15px}
@@ -156,6 +156,7 @@ a:hover{color:var(--gold-text)}
 .link-list li:last-child{border-bottom:1px solid var(--line-2)}
 .link-list a{display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:46px;padding:4px 0;color:var(--ink);text-decoration:none}
 .link-list a:hover{color:var(--gold-text)}
+.link-list .item{display:flex;align-items:center;min-height:46px;padding:4px 0}
 .link-list a>span[aria-hidden]{transition:transform .2s}
 .link-list a:hover>span[aria-hidden]{transform:translateX(4px)}
 
@@ -173,8 +174,8 @@ a:hover{color:var(--gold-text)}
 .ba-range{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;pointer-events:none}
 .ba-live:focus-within .ba-knob{outline:2px solid var(--gold-light);outline-offset:3px}
 .job-card{display:flex;flex-direction:column;gap:16px;color:var(--ink);text-decoration:none}
-.job-card:hover{color:var(--ink)}
-.job-card:hover .job-title{color:var(--gold-text)}
+a.job-card:hover{color:var(--ink)}
+a.job-card:hover .job-title{color:var(--gold-text)}
 .job-meta{display:flex;flex-direction:column;gap:4px}
 .job-meta .eyebrow{letter-spacing:.16em}
 .job-title{margin:0;font-family:var(--serif);font-weight:500;font-size:28px;line-height:1.15}
@@ -234,6 +235,8 @@ a.chip-ink:hover{background:#34383B;color:var(--paper-2)}
 /* instagram */
 .insta-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(6px,1vw,14px)}
 .insta-grid .media{aspect-ratio:1/1}
+.insta-handle{align-self:flex-start;font-size:17px;font-weight:500;color:var(--ink);text-underline-offset:4px;overflow-wrap:anywhere}
+.insta-handle:hover{color:var(--gold-text)}
 @media (max-width:860px){.insta-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 
 /* service page hero */
@@ -342,6 +345,7 @@ a.chip-ink:hover{background:#34383B;color:var(--paper-2)}
   .trust.carousel{background:transparent;border:0}
   .trust.carousel>div{border:1px solid rgba(243,238,230,.3)}
   .car-nav .car-btn{display:none}
+  .car-nav.arrows-only{display:none}
 }
 @media (max-width:860px){
   .jobs-grid{grid-template-columns:1fr}

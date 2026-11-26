@@ -11,7 +11,8 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from content import (GROUPS, SERVICES, TESTIMONIALS, ENQUIRY_TYPES, JOBS, HOME_JOBS,  # noqa: E402
-                     INSTAGRAM_TILES, COST_A, GUARANTEE, PHONE, WHATSAPP, EMAIL)
+                     INSTAGRAM_TILES, COST_A, GUARANTEE, PHONE, PHONE_HREF, WHATSAPP, EMAIL,
+                     INSTAGRAM_URL, INSTAGRAM_HANDLE, SHOW_SUBPAGES)
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE_NAME = "The Plastering and Rendering Group"
@@ -93,7 +94,7 @@ def topbar():
 <div class="wrap topbar-row">
 <span class="tb-long">Plastering, rendering and decorative finishes in Cheshire</span><span class="tb-short">Plastering &middot; Rendering &middot; Decorative finishes</span>
 <div class="top-extra">
-<a href="#contact">{e(PHONE)}</a>
+<a href="{PHONE_HREF}">{e(PHONE)}</a>
 <a href="#contact">{e(EMAIL)}</a>
 </div>
 </div>
@@ -119,11 +120,8 @@ def header(ctx):
         f'<p class="mnav-group">{e(g["name"])}</p>\n<ul>\n{items}\n</ul>'
         for g, items in service_links(ctx))
     svc_cls = ' is-current' if ctx.current == "services" else ""
-    return f'''<header class="site-header">
-<div class="wrap header-row">
-<a class="logo" href="./" aria-label="{SITE_NAME}, home"><img src="assets/logo-ink.png" alt="{SITE_NAME}"{img_size("logo-ink.png")}></a>
-<nav class="nav" aria-label="Main">
-<div class="nav-item" data-mega-wrap>
+    if SHOW_SUBPAGES:
+        desk = f'''<div class="nav-item" data-mega-wrap>
 <button class="nav-btn{svc_cls}" type="button" aria-expanded="false" aria-controls="mega" data-mega-btn>Services {ICON_CHEV}</button>
 <div class="mega" id="mega" hidden>
 <div class="wrap">
@@ -135,7 +133,23 @@ def header(ctx):
 </div>
 </div>
 <a href="jobs.html"{ctx.cur("jobs")}>Jobs we&rsquo;re proud of</a>
-<a href="reviews.html"{ctx.cur("reviews")}>Reviews</a>
+<a href="reviews.html"{ctx.cur("reviews")}>Reviews</a>'''
+        mob = f'''<button class="mnav-acc" type="button" aria-expanded="false" aria-controls="mnav-services" data-acc>Services {ICON_CHEV}</button>
+<div class="mnav-services" id="mnav-services" hidden>
+{m_groups}
+</div>
+<a href="jobs.html"{ctx.cur("jobs")}>Jobs we&rsquo;re proud of</a>
+<a href="reviews.html"{ctx.cur("reviews")}>Reviews</a>'''
+    else:
+        # single-page mode: the menu jumps to sections of the home page
+        desk = mob = f'''<a href="{ctx.home("services")}">Services</a>
+<a href="{ctx.home("jobs")}">Jobs we&rsquo;re proud of</a>
+<a href="{ctx.home("reviews")}">Reviews</a>'''
+    return f'''<header class="site-header">
+<div class="wrap header-row">
+<a class="logo" href="./" aria-label="{SITE_NAME}, home"><img src="assets/logo-ink.png" alt="{SITE_NAME}"{img_size("logo-ink.png")}></a>
+<nav class="nav" aria-label="Main">
+{desk}
 <a href="{ctx.home("about")}">About</a>
 </nav>
 <div class="header-actions">
@@ -145,12 +159,7 @@ def header(ctx):
 </div>
 <nav class="mnav" id="mnav" aria-label="Mobile" hidden>
 <div class="wrap">
-<button class="mnav-acc" type="button" aria-expanded="false" aria-controls="mnav-services" data-acc>Services {ICON_CHEV}</button>
-<div class="mnav-services" id="mnav-services" hidden>
-{m_groups}
-</div>
-<a href="jobs.html"{ctx.cur("jobs")}>Jobs we&rsquo;re proud of</a>
-<a href="reviews.html"{ctx.cur("reviews")}>Reviews</a>
+{mob}
 <a href="{ctx.home("about")}">About</a>
 <a href="#contact">Get a free quote</a>
 </div>
@@ -160,6 +169,11 @@ def header(ctx):
 
 def footer(ctx):
     groups = "\n".join(f'<a href="{ctx.home("services")}">{e(g["name"])}</a>' for g in GROUPS)
+    if SHOW_SUBPAGES:
+        explore = '<a href="jobs.html">Jobs we&rsquo;re proud of</a>\n<a href="reviews.html">Reviews</a>'
+    else:
+        explore = (f'<a href="{ctx.home("jobs")}">Jobs we&rsquo;re proud of</a>\n'
+                   f'<a href="{ctx.home("reviews")}">Reviews</a>')
     return f'''<footer class="site-footer">
 <div class="wrap">
 <div class="foot-grid">
@@ -173,8 +187,7 @@ def footer(ctx):
 </div>
 <div class="foot-col">
 <p class="foot-title">Explore</p>
-<a href="jobs.html">Jobs we&rsquo;re proud of</a>
-<a href="reviews.html">Reviews</a>
+{explore}
 <a href="{ctx.home("about")}">About</a>
 <a href="#contact">Contact</a>
 </div>
@@ -183,7 +196,7 @@ def footer(ctx):
 <span>theplasteringandrenderinggroup.co.uk</span>
 <span>plastererscheshire.co.uk</span>
 <span>rendererscheshire.co.uk</span>
-<span>[INSTAGRAM AND SOCIAL LINKS]</span>
+<a href="{INSTAGRAM_URL}" target="_blank" rel="noopener">Instagram</a>
 </div>
 <div class="foot-col">
 <p class="foot-title">Company</p>
@@ -202,8 +215,8 @@ def footer(ctx):
 
 
 def mobile_bar():
-    return '''<div class="mobile-bar">
-<a href="#contact">Call</a>
+    return f'''<div class="mobile-bar">
+<a href="{PHONE_HREF}">Call</a>
 <a href="#contact">WhatsApp</a>
 <a class="mb-quote" href="#contact">Free quote</a>
 </div>'''
@@ -219,10 +232,10 @@ def quote_section(ctx):
             for s in g["services"])
         svc_opts.append(f'<optgroup label="{e(g["name"])}">{inner}</optgroup>')
     svc_opts.append('<option value="not-sure">Not sure yet</option>')
-    rows = [("Phone", PHONE), ("WhatsApp", WHATSAPP), ("Email", EMAIL),
-            ("Rav", "[RAV'S EMAIL]")]
+    rows = [("Phone", PHONE, PHONE_HREF), ("WhatsApp", WHATSAPP, "#contact"), ("Email", EMAIL, "#contact"),
+            ("Rav", "[RAV'S EMAIL]", "#contact")]
     contact = "\n".join(
-        f'<a href="#contact"><span class="k">{e(k)}</span><span class="v">{e(v)}</span></a>' for k, v in rows)
+        f'<a href="{h}"><span class="k">{e(k)}</span><span class="v">{e(v)}</span></a>' for k, v, h in rows)
     return f'''<section class="section bg-dark" id="contact">
 <div class="wrap quote-grid">
 <div class="quote-copy">
@@ -340,8 +353,11 @@ def home_page():
     ctx = Ctx("index.html")
     cards = []
     for g in GROUPS:
-        links = "\n".join(
-            f'<li><a href="{s}.html"><span>{e(menu_name(s))}</span>{ARROW}</a></li>' for s in g["services"])
+        if SHOW_SUBPAGES:
+            links = "\n".join(
+                f'<li><a href="{s}.html"><span>{e(menu_name(s))}</span>{ARROW}</a></li>' for s in g["services"])
+        else:
+            links = "\n".join(f'<li><span class="item">{e(menu_name(s))}</span></li>' for s in g["services"])
         cards.append(f'''<article class="svc-card">
 <div class="media">{img(g["image"], f"Placeholder image for {g['name'].lower()}")}<span class="tag">Placeholder image</span></div>
 <div class="svc-body">
@@ -353,9 +369,26 @@ def home_page():
 </div>
 </article>''')
     jobs_by_id = {j["id"]: j for j in JOBS}
-    job_cards = "\n".join(
-        f'<a class="job-card" href="jobs.html#{j}">\n{ba(jobs_by_id[j], live=False)}\n{job_meta(jobs_by_id[j])}\n</a>'
-        for j in HOME_JOBS)
+    if SHOW_SUBPAGES:
+        job_cards = "\n".join(
+            f'<a class="job-card" href="jobs.html#{j}">\n{ba(jobs_by_id[j], live=False)}\n{job_meta(jobs_by_id[j])}\n</a>'
+            for j in HOME_JOBS)
+    else:
+        job_cards = "\n".join(
+            f'<div class="job-card">\n{ba(jobs_by_id[j], live=False)}\n{job_meta(jobs_by_id[j])}\n</div>'
+            for j in HOME_JOBS)
+    see_all_jobs = '<a class="btn btn-line btn-md to-end" href="jobs.html">See all jobs</a>' if SHOW_SUBPAGES else ""
+    if SHOW_SUBPAGES:
+        car_nav = f'''<div class="car-nav to-end">
+<button class="car-btn" type="button" data-car-prev="reviews-car" aria-label="Previous reviews">{ICON_LEFT}</button>
+<button class="car-btn" type="button" data-car-next="reviews-car" aria-label="Next reviews">{ICON_RIGHT}</button>
+<a class="btn btn-line btn-md" href="reviews.html">All reviews</a>
+</div>'''
+    else:
+        car_nav = f'''<div class="car-nav arrows-only">
+<button class="car-btn" type="button" data-car-prev="reviews-car" aria-label="Previous reviews">{ICON_LEFT}</button>
+<button class="car-btn" type="button" data-car-next="reviews-car" aria-label="Next reviews">{ICON_RIGHT}</button>
+</div>'''
     reviews = "\n".join(review_card(n, r) for n, r in TESTIMONIALS)
     insta = "\n".join(
         f'<div class="media">{img(t, "Placeholder for an Instagram post")}</div>' for t in INSTAGRAM_TILES)
@@ -368,7 +401,7 @@ def home_page():
 <p class="lead">One team for every surface of the building. External render, internal plastering and drylining, and hand-finished microcement, Venetian and marble plaster.</p>
 <div class="btn-row">
 <a class="btn btn-ink btn-wide" href="#contact">Get a free quote</a>
-<a class="btn btn-line btn-case" href="#contact">{ICON_PHONE}<span>Call<span class="lbl-l"> {e(PHONE)}</span></span></a>
+<a class="btn btn-line btn-case" href="{PHONE_HREF}">{ICON_PHONE}<span>Call<span class="lbl-l"> {e(PHONE)}</span></span></a>
 <a class="btn btn-line btn-case" href="#contact">{ICON_CHAT}<span>WhatsApp</span></a>
 </div>
 </div>
@@ -404,7 +437,7 @@ def home_page():
 <span class="eyebrow">Recent work</span>
 <h2 class="h2">Jobs we&rsquo;re proud of</h2>
 </div>
-<a class="btn btn-line btn-md to-end" href="jobs.html">See all jobs</a>
+{see_all_jobs}
 </div>
 {car(job_cards, "grid-3")}
 </div>
@@ -433,11 +466,7 @@ def home_page():
 <span class="eyebrow">Reviews</span>
 <h2 class="h2">What clients say</h2>
 </div>
-<div class="car-nav to-end">
-<button class="car-btn" type="button" data-car-prev="reviews-car" aria-label="Previous reviews">{ICON_LEFT}</button>
-<button class="car-btn" type="button" data-car-next="reviews-car" aria-label="Next reviews">{ICON_RIGHT}</button>
-<a class="btn btn-line btn-md" href="reviews.html">All reviews</a>
-</div>
+{car_nav}
 </div>
 {car(reviews, "car-always", "reviews-car")}
 </div>
@@ -462,14 +491,15 @@ def home_page():
 <div class="sec-head-row">
 <div class="sec-head">
 <span class="eyebrow">Instagram</span>
-<h2 class="h2">@[INSTAGRAM HANDLE]</h2>
+<h2 class="h2">Follow our work</h2>
+<a class="insta-handle" href="{INSTAGRAM_URL}" target="_blank" rel="noopener">{e(INSTAGRAM_HANDLE)}</a>
 </div>
-<a class="btn btn-line btn-md to-end" href="#instagram">Follow on Instagram</a>
+<a class="btn btn-line btn-md to-end" href="{INSTAGRAM_URL}" target="_blank" rel="noopener">Follow on Instagram</a>
 </div>
 <div class="insta-grid">
 {insta}
 </div>
-<p class="note">The live Instagram feed appears here once the account is set up and posting.</p>
+<p class="note">Our latest Instagram posts will show here once the feed is connected.</p>
 </div>
 </section>'''
     return page(ctx, f"{SITE_NAME} | Plastering, rendering and decorative finishes in Cheshire",
@@ -544,7 +574,7 @@ def service_page(slug):
 <p class="lead">{e(s["intro"])}</p>
 <div class="btn-row">
 <a class="btn btn-ink" href="#contact"><span class="lbl-l">Get a free quote</span><span class="lbl-s">Free quote</span></a>
-<a class="btn btn-line btn-case" href="#contact">{ICON_PHONE}<span>Call<span class="lbl-l"> {e(PHONE)}</span></span></a>
+<a class="btn btn-line btn-case" href="{PHONE_HREF}">{ICON_PHONE}<span>Call<span class="lbl-l"> {e(PHONE)}</span></span></a>
 </div>
 </div>
 <figure class="page-hero-media">{img(s["image"], f"Placeholder image for {s['name']}", lazy=False)}<figcaption class="tag">Placeholder image</figcaption></figure>

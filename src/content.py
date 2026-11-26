@@ -6,8 +6,16 @@ Service descriptions, benefits and FAQ answers are draft copy written for the de
 check them with Rav before the site goes live.
 """
 
-PHONE = "[PHONE NUMBER]"
+PHONE = "07894 915828"
+PHONE_HREF = "tel:+447894915828"
 WHATSAPP = "[WHATSAPP NUMBER]"
+INSTAGRAM_URL = "https://www.instagram.com/theplasteringandrenderinggroup/"
+INSTAGRAM_HANDLE = "@theplasteringandrenderinggroup"
+
+# The service pages, Jobs we're proud of and Reviews pages are still built, but while
+# their content is being gathered nothing in the menus or on the home page links to
+# them. Set to True (and rebuild) to link them again.
+SHOW_SUBPAGES = False
 EMAIL = "info@theplasteringandrenderinggroup.co.uk"
 
 GROUPS = [
